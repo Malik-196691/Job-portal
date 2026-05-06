@@ -1,5 +1,5 @@
 const Job = require("../models/Job");
-const ExpressError = require("../utils/ExpressError");
+const ExpressError = require("../utils/expressError");
 
 module.exports = {
   getAllJobs: async (req, res) => {
