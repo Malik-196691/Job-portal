@@ -26,7 +26,7 @@ export default function MyApplications() {
     
 
     axios
-      .get(`http://localhost:3001/applications/${userId}`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/applications/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

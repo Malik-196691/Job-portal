@@ -11,7 +11,7 @@ export default function ApplicationCard({ application }) {
   };
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:3001/applications/${application.id}`, {
+    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/applications/${application.id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     window.location.reload();

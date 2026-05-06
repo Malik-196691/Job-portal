@@ -17,7 +17,7 @@ export default function DialogBox({ job, open, setOpen }) {
     }
     try {
       await axios.post(
-        `http://localhost:3001/applications/apply`,
+        `${process.env.NEXT_PUBLIC_API_URL}/applications/apply`,
         { jobId: job.id, resume_url: resumeUrl, cover_letter: coverLetter },
         { headers: { Authorization: `Bearer ${token}` } }
       );

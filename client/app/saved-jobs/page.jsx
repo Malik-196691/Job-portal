@@ -14,7 +14,7 @@ export default function SavedJobs() {
     const token = localStorage.getItem("token");
     if (!token) return;
     axios
-      .get("http://localhost:3001/jobs/saved", {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/jobs/saved`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

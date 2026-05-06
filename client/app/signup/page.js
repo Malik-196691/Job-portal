@@ -20,7 +20,7 @@ function Signup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3001/users/signup",
+        `${process.env.NEXT_PUBLIC_API_URL}/users/signup`,
         formData
       );
       console.log(response.data);

@@ -19,7 +19,7 @@ function AdminSignup() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:3001/users/adminSignup",
+                `${process.env.NEXT_PUBLIC_API_URL}/users/adminSignup`,
                 formData,
             );
             console.log(response.data);

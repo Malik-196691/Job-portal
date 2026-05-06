@@ -14,7 +14,7 @@ export default function Applications() {
     }
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/applications`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/applications`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setApplications(response.data.applications || []);

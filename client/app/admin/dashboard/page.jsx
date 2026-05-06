@@ -11,7 +11,7 @@ const Dashboard = () => {
     const fetchAnalytics = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/users/analytics",
+          `${process.env.NEXT_PUBLIC_API_URL}/users/analytics`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

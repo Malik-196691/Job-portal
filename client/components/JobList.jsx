@@ -17,7 +17,7 @@ export default function JobList() {
   });
 
   useEffect(() => {
-    const apiUrl = `http://localhost:3001/jobs?page=${currentPage}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/jobs?page=${currentPage}`;
 
     // Build the query string dynamically
     const queryParams = new URLSearchParams();

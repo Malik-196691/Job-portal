@@ -16,7 +16,7 @@ export default function JobCard({ job}) {
       setToken(token);
       if (token) {
         setUser(JSON.parse(atob(token.split(".")[1])));
-        axios.get('http://localhost:3001/jobs/saved', {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/jobs/saved`, {
           headers: { Authorization: `Bearer ${token}` },
         }).then((res) => {
           setSavedJobIds(res.data.jobs.map((job) => job.id));
@@ -29,7 +29,7 @@ export default function JobCard({ job}) {
     setOpen(true);
   };
   const handleDelete = () => {
-    axios.delete(`http://localhost:3001/jobs/${job.id}`, {
+    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/jobs/${job.id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     window.location.reload();
@@ -37,7 +37,7 @@ export default function JobCard({ job}) {
 
   const handleSaveJob = () => {
     axios
-      .post(`http://localhost:3001/jobs/save/${job.id}`, {}, {
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/jobs/save/${job.id}`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
@@ -48,7 +48,7 @@ export default function JobCard({ job}) {
 
   const handleUnsaveJob = () => {
     axios
-      .delete(`http://localhost:3001/jobs/unsave/${job.id}`,
+      .delete(`${process.env.NEXT_PUBLIC_API_URL}/jobs/unsave/${job.id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         })

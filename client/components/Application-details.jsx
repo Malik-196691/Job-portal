@@ -24,7 +24,7 @@ export default function ApplicationDetails({
     setIsSaving(true);
     try {
       await axios.put(
-        `http://localhost:3001/applications/${application.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/applications/${application.id}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } },
       );

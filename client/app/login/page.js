@@ -20,7 +20,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3001/users/login",
+        `${process.env.NEXT_PUBLIC_API_URL}/users/login`,
         formData
       );
       localStorage.setItem("token", response.data);

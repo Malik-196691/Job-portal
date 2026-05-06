@@ -17,7 +17,7 @@ export default function EditJob({ job, open, setOpen }) {
 
   const handleEdit = async () => {
     await axios.put(
-      `http://localhost:3001/jobs/${job.id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/jobs/${job.id}`,
       {
         title,
         company,

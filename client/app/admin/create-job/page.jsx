@@ -14,7 +14,7 @@ export default function CreateJob({ open, setOpen }) {
     e.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      await axios.post("http://localhost:3001/jobs", formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/jobs`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOpen(false);
