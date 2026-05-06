@@ -117,8 +117,8 @@ export default function MyApplications() {
             </p>
 
             <button
-              onClick={() => navigate("/jobs")}
-              className="mt-8 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-base font-bold shadow-md shadow-blue-500/20 hover:shadow-lg hover:-translate-y-0.5 transition-all w-full sm:w-auto"
+              onClick={() => navigate.push("/jobs")}
+              className="cursor-pointer mt-8 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-base font-bold shadow-md shadow-blue-500/20 hover:shadow-lg hover:-translate-y-0.5 transition-all w-full sm:w-auto"
             >
               Explore Available Jobs
             </button>

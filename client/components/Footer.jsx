@@ -48,7 +48,7 @@ export default function Footer() {
               Sign Up
             </Link>
             <span className="hidden sm:inline text-slate-200">|</span>
-            <Link href="/admin-login" className="hover:text-blue-500 transition-colors">
+            <Link href="/admin/login" className="hover:text-blue-500 transition-colors">
               Employers
             </Link>
           </div>

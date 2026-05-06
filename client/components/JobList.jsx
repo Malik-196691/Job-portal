@@ -28,6 +28,7 @@ export default function JobList() {
     if (filters.company) queryParams.set("company", filters.company);
     if (filters.sort) queryParams.set("sort", filters.sort);
 
+    setLoading(true);
     axios
       .get(`${apiUrl}&${queryParams.toString()}`)
       .then((res) => res.data)
@@ -37,15 +38,27 @@ export default function JobList() {
         setLoading(false);
       });
   }, [currentPage, filters]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+  
+  
   return (
     <>
-      <div className="job-list-wrapper">
-        <Search filters={filters} setFilters={setFilters} jobs={jobs} />
+    <div className="page">
+     {loading ? (
+       <div className="flex flex-col items-center justify-center py-24 gap-4">
+            <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin"></div>
+            <p className="text-sm font-medium text-slate-500">
+              Loading...
+            </p>
+          </div>
+     ) : jobs?.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24 gap-4">
+          <p className="text-sm font-medium text-slate-500">
+            No jobs found
+          </p>
+        </div>
+     ) : (
+       <div className="job-list-wrapper">
+          <Search filters={filters} setFilters={setFilters} jobs={jobs} />
         <div className="job-grid">
           {jobs?.map((job) => (
             <JobCard key={job.id} job={job} />
@@ -72,6 +85,8 @@ export default function JobList() {
           </button>
         </div>
       </div>
+    )}
+    </div>
     </>
   );
 }
