@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const User = require("../models/User");
-const ExpressError = require("../utils/ExpressError");
+const ExpressError = require("../utils/expressError");
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const bcrypt = require("bcrypt");
