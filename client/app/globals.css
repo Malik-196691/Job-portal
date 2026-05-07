@@ -118,15 +118,18 @@
 
 body {
   box-sizing: border-box;
-  min-width: 100%;
-  margin: 0 ;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
   min-height: 100vh;
   background: linear-gradient(145deg, #6e8fdb 0%, #d9d9db 50%, #7a6ee2 100%);
-  /* background: radial-gradient(circle at center, #e0e7ff, #f3e8ff); */
 }
 
 #root {
-  width: 95vw;
+  width: 100%;
+  max-width: 95vw;
   margin: 0 auto;
   text-align: center;
   min-height: 100svh;
@@ -134,6 +137,12 @@ body {
   flex-direction: column;
   box-sizing: border-box;
   padding: 0 16px;
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 0 10px;
+  }
 }
 
 #root.full-screen-root {
@@ -208,6 +217,22 @@ code {
   gap: 20px;
   padding: 16px 0;
   text-align: left;
+}
+
+@media (max-width: 480px) {
+  .job-list-wrapper {
+    padding: 16px 0;
+  }
+  .job-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* ─── Page Wrapper ───────────────────────────────────── */
+.page {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ─── Job Card ──────────────────────────────────────── */
@@ -388,6 +413,19 @@ code {
   font-size: 15px;
 }
 
+@media (max-width: 480px) {
+  .pagination {
+    gap: 10px;
+  }
+  .page-btn {
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+  .page-indicator {
+    font-size: 12px;
+  }
+}
+
 /* ─── Modal Overlay ──────────────────────────────────── */
 .modal-overlay {
   position: fixed;
@@ -428,6 +466,15 @@ code {
   gap: 18px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
   animation: slideUp 0.3s ease;
+}
+
+@media (max-width: 520px) {
+  .modal-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
 }
 
 @keyframes slideUp {
@@ -580,6 +627,15 @@ code {
   .hero-content {
     flex-direction: column;
     text-align: center;
+    padding: 24px 20px;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 20px 16px;
+    gap: 20px;
   }
 }
 
@@ -598,6 +654,13 @@ code {
   }
 }
 
+@media (max-width: 480px) {
+  .hero-subtitle {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
 .hero-title {
   font-size: 64px !important;
   font-weight: 800 !important;
@@ -609,6 +672,14 @@ code {
 
 @media (max-width: 1024px) {
   .hero-title { font-size: 48px !important; }
+}
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 36px !important; letter-spacing: -1px !important; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 28px !important; letter-spacing: -0.5px !important; }
 }
 
 .highlight {
@@ -629,6 +700,21 @@ code {
   display: flex;
   gap: 16px;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .hero-buttons .btn-primary,
+  .hero-buttons > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 .btn-primary {
@@ -672,6 +758,19 @@ code {
   flex: 1;
   max-width: 550px;
   animation: float-svg 6s infinite ease-in-out alternate;
+}
+
+@media (max-width: 900px) {
+  .hero-illustration {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-illustration {
+    display: none;
+  }
 }
 
 .hero-illustration svg {

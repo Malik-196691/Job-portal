@@ -12,6 +12,7 @@ export default function Navbar() {
   const [jobsDropdownOpen, setJobsDropdownOpen] = useState(false);
   const jobsDropdownRef = useRef(null);
   const [showCreateJobModal, setShowCreateJobModal] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [user, setUser] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
@@ -37,11 +38,12 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setDropdownOpen(false);
+    setMobileMenuOpen(false);
     router.push("/jobs");
     window.location.reload();
   };
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -54,6 +56,18 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
+
+  const closeMobile = () => setMobileMenuOpen(false);
 
   return (
     <>
@@ -80,7 +94,7 @@ export default function Navbar() {
         <span className="navbar-title">JobPortal</span>
       </Link>
 
-      {/* ── Right: Nav links + User dropdown ── */}
+      {/* ── Right: Nav links + User dropdown (desktop) ── */}
       <div className="navbar-right">
         { isMounted && user  ? (
           <div className="user-menu" ref={jobsDropdownRef}>
@@ -250,8 +264,105 @@ export default function Navbar() {
           </div>
         )}
       </div>
+
+      {/* ── Hamburger Button (mobile only) ── */}
+      <button
+        className={`hamburger-btn ${mobileMenuOpen ? "open" : ""}`}
+        onClick={() => setMobileMenuOpen((o) => !o)}
+        aria-label="Toggle menu"
+      >
+        <span className="hamburger-line"></span>
+        <span className="hamburger-line"></span>
+        <span className="hamburger-line"></span>
+      </button>
     </nav>
-      <CreateJob open={showCreateJobModal} setOpen={setShowCreateJobModal} />
+
+    {/* ── Mobile Menu Drawer ── */}
+    <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+      <div className="mobile-menu-backdrop" onClick={closeMobile} />
+      <div className="mobile-menu-panel">
+        {/* User info card */}
+        {isMounted && user && (
+          <div className="mobile-user-info">
+            <div className="mobile-user-avatar">
+              {user?.username?.[0]?.toUpperCase() ?? "U"}
+            </div>
+            <div className="mobile-user-details">
+              <span className="mobile-user-name-text">{user?.username ?? "User"}</span>
+              <span className="mobile-user-email-text">{user?.email}</span>
+            </div>
+            {user.role === "admin" && (
+              <span className="mobile-nav-badge">Admin</span>
+            )}
+          </div>
+        )}
+
+        {/* Nav links */}
+        <Link href="/jobs" className="mobile-nav-link" onClick={closeMobile}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Explore Jobs
+        </Link>
+
+        {isMounted && user?.role === "user" && (
+          <>
+            <Link href="/my-applications" className="mobile-nav-link" onClick={closeMobile}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Applications
+            </Link>
+            <Link href="/saved-jobs" className="mobile-nav-link" onClick={closeMobile}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              Saved Jobs
+            </Link>
+          </>
+        )}
+
+        {isMounted && user?.role === "admin" && (
+          <>
+            <Link href="/admin/dashboard" className="mobile-nav-link" onClick={closeMobile}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Dashboard
+            </Link>
+            <Link href="/admin/applications" className="mobile-nav-link" onClick={closeMobile}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Applications
+            </Link>
+            <button
+              className="mobile-nav-link"
+              onClick={() => { setShowCreateJobModal(true); closeMobile(); }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Create Job
+            </button>
+          </>
+        )}
+
+        {/* Auth or logout */}
+        <div className="mobile-nav-divider" />
+        {isMounted && user ? (
+          <button className="mobile-nav-link mobile-logout" onClick={handleLogout}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Logout
+          </button>
+        ) : (
+          <>
+            <Link href="/login" className="mobile-nav-link" onClick={closeMobile}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Login
+            </Link>
+            <Link href="/signup" className="mobile-nav-link" onClick={closeMobile}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Sign Up
+            </Link>
+          </>
+        )}
+      </div>
+    </div>
+
+    <CreateJob open={showCreateJobModal} setOpen={setShowCreateJobModal} />
     </>
   );
 }
