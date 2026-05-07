@@ -34,7 +34,7 @@ export default function CreateJob({ open, setOpen }) {
     <>
       <div className="modal-overlay" onClick={() => setOpen(false)}>
         <div
-          className=" modal w-[80%] sm:w-[60%] md:w-[50%] lg:w-[40%] h-fit"
+          className=" modal w-[80%] sm:w-[70%] md:w-[60%] lg:w-[40%] h-fit"
           onClick={(e) => e.stopPropagation()}
         >
           <form
