@@ -33,7 +33,7 @@ export default function ApplicationCard({ application }) {
     const user = JSON.parse(atob(token.split(".")[1]));
     if (user.role === "admin") {
       return (
-        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group ">
+        <div className="animate-fade-in-up bg-white/80 backdrop-blur-md rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group ">
           <div className="flex-1">
             <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors mb-1">
               {application.job_title || "Untitled Role"}
@@ -59,7 +59,7 @@ export default function ApplicationCard({ application }) {
     }
   }
   return (
-    <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group">
+    <div className="animate-fade-in-up  bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group">
       <div className="flex-1">
         <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors mb-1">
           {application.job_title || "Untitled Role"}

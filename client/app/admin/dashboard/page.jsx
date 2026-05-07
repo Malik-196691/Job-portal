@@ -29,7 +29,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] py-10 flex flex-col items-center">
+    <div className="animate-fade-in-up  w-full min-h-[calc(100vh-80px)] py-10 flex flex-col items-center">
       <div className="w-full max-w-5xl px-4 flex flex-col gap-8">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-extrabold text-slate-800 tracking-tight m-0">

@@ -46,7 +46,7 @@ export default function MyApplications() {
     <div className="min-h-[calc(100vh-140px)] w-full max-w-5xl mx-auto px-4 py-12 relative z-10">
       {/* HEADER */}
       <div className="mb-10 animate-fade-in-up">
-        <div className="flex items-center gap-4 mb-3">
+        <div className="flex items-center gap-4  mb-3">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white text-xl shadow-lg shadow-blue-500/30">
             <svg
               width="24"
@@ -65,8 +65,8 @@ export default function MyApplications() {
               <polyline points="10 9 9 9 8 9"></polyline>
             </svg>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight">
-            Application Tracker
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-800 tracking-tight ">
+            Applications
           </h1>
         </div>
 

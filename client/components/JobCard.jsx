@@ -63,7 +63,7 @@ export default function JobCard({ job}) {
       return (
         <>
           {open && <EditJob job={job} open={open} setOpen={setOpen} />}
-          <div className="job-card">
+          <div className="job-card animate-fade-in-up">
             <div className="job-card-header">
               <div>
                 <h3 className="job-title">{job.title}</h3>
@@ -92,7 +92,7 @@ export default function JobCard({ job}) {
   return (
     <>
       {open && <DialogBox job={job} open={open} setOpen={setOpen} />}
-      <div className="job-card">
+      <div className="job-card animate-fade-in-up">
         <div className="job-card-header">
           <div>
             <h3 className="job-title">{job.title}</h3>

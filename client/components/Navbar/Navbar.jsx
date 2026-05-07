@@ -267,7 +267,7 @@ export default function Navbar() {
 
       {/* ── Hamburger Button (mobile only) ── */}
       <button
-        className={`hamburger-btn ${mobileMenuOpen ? "open" : ""}`}
+        className={`hamburger-btn  ${mobileMenuOpen ? "open" : ""}`}
         onClick={() => setMobileMenuOpen((o) => !o)}
         aria-label="Toggle menu"
       >
